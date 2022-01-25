@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: todolist
+      POSTGRES_USER: todolist
+    ports:
+      - "5432:5432"
