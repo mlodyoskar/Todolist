@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 80%;
+  height: 60%;
   background-color: #fefefe;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
@@ -29,26 +29,9 @@
   justify-self: end;
   width: 100%;
 }
-.todo-input {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border: none;
-  /* text-align: center; */
-  padding: 0.6em;
-  border-radius: 5%;
-  outline: none;
-  margin: 1em;
-}
+
 .todo-input:focus::placeholder {
   color: transparent;
-}
-
-.todo-button {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border: none;
-  background-color: #189ad3;
-  color: white;
-  padding: 0.6em;
-  border-radius: 5%;
 }
 
 .todos {
@@ -69,10 +52,34 @@
 }
 
 .todo-name {
-  font-size: 18px;
+  font-size: 16px;
+  width: 80%;
+  text-align: start;
+}
+.todo-name_completed {
+  text-decoration: line-through;
+}
+.todo-button {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  border-radius: 20px;
+  justify-self: flex-end;
+  cursor: pointer;
 }
 
 .todo-checkbox {
   justify-self: end;
   align-self: center;
+}
+
+.todo-button_delete {
+  background-color: rgb(255, 0, 0);
+}
+.todo-button_toggleOFF {
+  border: 1px solid grey;
+}
+.todo-button_toggleON {
+  border: 1px solid grey;
+  background: green;
 }

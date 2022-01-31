@@ -1,46 +1,58 @@
-import logo from './logo.svg';
+import { Todo } from './components/Todo/Todo';
+import { Form } from './components/Form/Form';
 import React, { useState } from 'react';
 import './App.css';
 
-
+const initialFormState = { name: '', completed: false };
 
 
 function App() {
-  const [todos, setTodos] = useState([{ text: 'walk dog', completed: false }]);
-  const [todo, setTodo] = useState('');
+  const [todos, setTodos] = useState([{ name: 'walk dog', completed: false }]);
+  const [formValues, setFormValues] = useState(initialFormState);
 
-  const handleChange = (e) => {
-    setTodo(e.target.value);
+  const handleInputChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  }
+  const deleteTodo = (name) => {
+    let filteredTodos = todos.filter(todo => {
+      return todo.name !== name;
+    })
+    setTodos(filteredTodos);
+  }
+  const toggleComplete = (name) => {
+    let filteredTodos = todos.map(todo => {
+      if (todo.name === name) {
+        todo.completed = !todo.completed;
+      }
+      return todo;
+    })
+    console.log(filteredTodos)
+    setTodos(filteredTodos);
   }
 
-  const handleSubmit = (e) => {
-    if (todo != '') {
-      setTodos([todo, ...todos]);
-      setTodo('');
-    }
+  const handleAddTodo = (e) => {
     e.preventDefault();
-  }
+    const newTodo = {
+      name: formValues.name,
+      completed: formValues.completed
+    }
+    if (newTodo.name !== "") {
+      setTodos([newTodo, ...todos]);
+      setFormValues(initialFormState);
+    }
 
-  const Todo = (todo) => {
-    return (
-      <div className={"todo"}>
-        <p className="todo-name">{todo.text}</p>
-        <input className="todo-checkbox" type="checkbox" />
-      </div>
-    );
   }
 
   return (
     <div className="App">
       <div className="container">
+        <Form formValues={formValues} handleInputChange={handleInputChange} handleAddTodo={handleAddTodo} />
         <div className="todos">
-          {todos.map(todo => <Todo todo={todo} />)}
+          {todos.map(todo => <Todo toggleComplete={toggleComplete} deleteTodo={deleteTodo} todo={todo} />)}
         </div>
-        <form className="add" onSubmit={handleSubmit} >
-          <input className="todo-input" value={todo} onChange={handleChange} placeholder="Add new todo" />
-          <button className="todo-button">Add</button>
-        </form>
-
       </div>
     </div>
   );
