@@ -2,12 +2,14 @@ import styled from 'styled-components'
 
 
 export const Button = styled.button`
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border: none;
-    background-color: #189ad3;
-    color: white;
-    width: 4em;
-    border-radius: 40px;
+    display: flex;
+    cursor: pointer;
+    border: ${props => props.primary ? "none" : props.secondary ? "1px solid black" : "#123456"};
+    color: ${props => props.primary ? "white" : "black"};
+    border-radius: 0.5em;
     padding: 0.6em;
-    font-size: 1em;
+    margin: 0 0.8em;
+    margin-left: 0;
+    font-size: 0.8rem;
+    background-color: ${props => props.primary ? "rgba(70,130,180, 1)" : props.secondary ? "white" : "#123456"}
 `;
