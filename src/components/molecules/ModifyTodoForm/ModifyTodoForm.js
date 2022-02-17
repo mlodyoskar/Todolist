@@ -22,16 +22,17 @@ const ButtonsWrapper = styled.div`
 `;
 
 
-export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAddingTodo }) => {
+export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBeingModified, handleSubmit }) => {
     return (
 
-        <Wrapper onSubmit={handleSubmit} >
+        <Wrapper onSubmit={(e) => handleSubmit(e, todo.name)} >
             <InputWrapper>
                 <Input
                     placeholder="e.g Do the rest of scrimba lessons"
                     autoComplete="off"
                     name="name"
                     type="text"
+                    autoFocus
                     value={formValues.name}
                     onChange={handleInputChange}
                 />
@@ -47,8 +48,8 @@ export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAd
 
             </InputWrapper>
             <ButtonsWrapper>
-                <Button type="submit" primary >Add Task</Button>
-                <Button type="button" secondary onClick={toggleAddingTodo} >Cancel</Button>
+                <Button type="submit" primary onClick={(e) => handleSubmit(e, todo.id, todo.name)} >Edit Todo</Button>
+                <Button type="button" secondary onClick={() => toggleBeingModified(todo.id)} >Cancel</Button>
             </ButtonsWrapper>
         </Wrapper >
     )

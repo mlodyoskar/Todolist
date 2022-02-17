@@ -120,12 +120,12 @@ const OptionsListItem = styled.li`
     }
 `;
 
-const Options = ({ deleteTodo }) => {
+const Options = ({ deleteTodo, toggleBeingModified }) => {
     return (
         <OptionsWrapper>
             <Overlay />
             <OptionsList>
-                <OptionsListItem>
+                <OptionsListItem onClick={toggleBeingModified}>
                     <FiEdit /> Edit
                 </OptionsListItem>
                 <OptionsListItem onClick={deleteTodo} delete >
@@ -137,7 +137,7 @@ const Options = ({ deleteTodo }) => {
 }
 
 
-export const Todo = ({ todo, toggleComplete, deleteTodo }) => {
+export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) => {
     const [optionsVisible, setOptionsVisible] = useState(false);
 
     const toggleOptionsVisibility = () => {
@@ -146,7 +146,7 @@ export const Todo = ({ todo, toggleComplete, deleteTodo }) => {
     return (
         <Wrapper>
             <CheckBoxWrapper>
-                <Checkbox done={todo.completed} onClick={() => { toggleComplete(todo.name) }}></Checkbox>
+                <Checkbox done={todo.completed} onClick={() => { toggleComplete(todo.id) }}></Checkbox>
             </CheckBoxWrapper>
             <TodoWrapper>
                 <div>
@@ -161,7 +161,7 @@ export const Todo = ({ todo, toggleComplete, deleteTodo }) => {
             </TodoWrapper>
             <ThreeDotsWrapper onClick={toggleOptionsVisibility}>
                 <ThreeDots />
-                {optionsVisible ? <Options deleteTodo={() => deleteTodo(todo.name)} /> : null}
+                {optionsVisible ? <Options toggleBeingModified={() => toggleBeingModified(todo.id)} deleteTodo={() => deleteTodo(todo.id)} /> : null}
             </ThreeDotsWrapper>
         </Wrapper>
     );
