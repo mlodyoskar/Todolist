@@ -139,9 +139,18 @@ const Options = ({ deleteTodo, toggleBeingModified }) => {
 
 export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) => {
     const [optionsVisible, setOptionsVisible] = useState(false);
+    const [dateVisible, setDateVisible] = useState(false);
+    const [tagsVisible, setTagsVisible] = useState(false);
+
 
     const toggleOptionsVisibility = () => {
         setOptionsVisible((prevVal) => !prevVal);
+    }
+    const toggleDateVisibility = () => {
+        setDateVisible((prevVal) => !prevVal);
+    }
+    const toggleTagsVisibility = () => {
+        setTagsVisible((prevVal) => !prevVal);
     }
     return (
         <Wrapper>
@@ -153,7 +162,7 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) 
                     <p className={todo.completed ? "todo-name todo-name_completed" : "todo-name"}>{todo.name}</p>
                 </div>
                 <TodoInfo>
-                    <TodoDate dueDate={todo.dueDate} >
+                    <TodoDate onClick={toggleDateVisibility} dueDate={todo.dueDate} >
                         <CalendarIcon /> {GetDayAndMonth(todo.dueDate)}
                     </TodoDate>
                     {todo.tags.map(tag => <TodoTag><TagIcon />{tag}</TodoTag>)}

@@ -1,5 +1,5 @@
 import { Todo } from './components/molecules/Todo/Todo';
-import { AddTodo, Form } from './components/molecules/AddTodo/AddTodo';
+import { AddTodo } from './components/molecules/AddTodo/AddTodo';
 import { TodoForm } from './components/molecules/TodoForm/TodoForm';
 import { ModifyTodoForm } from './components/molecules/ModifyTodoForm/ModifyTodoForm';
 import React, { useState } from 'react';
@@ -17,7 +17,16 @@ function App() {
   const [editFormValues, setEditFormValues] = useState(initialFormState);
 
   const [isTodoBeingAdded, setIsTodoBeingAdded] = useState(false);
+  const [dateVisible, setDateVisible] = useState(false);
+  const [tagsVisible, setTagsVisible] = useState(false);
 
+  const toggleDateVisibility = () => {
+    console.log("changed date visiblity")
+    setDateVisible((prevVal) => !prevVal);
+  }
+  const toggleTagsVisibility = () => {
+    setTagsVisible((prevVal) => !prevVal);
+  }
 
   const handleAddTodoInputChange = (e) => {
     setAddFormValues({
@@ -130,6 +139,7 @@ function App() {
             handleInputChange={handleAddTodoInputChange}
             handleSubmit={handleSubmit}
             toggleAddingTodo={toggleAddingTodo}
+            toggleDateVisibility={toggleDateVisibility}
             formValues={addFormValues}
           /> :
           <AddTodo toggleAddingTodo={toggleAddingTodo} />}
