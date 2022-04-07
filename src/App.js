@@ -1,10 +1,11 @@
-import { Todo } from './components/molecules/Todo/Todo';
-import { AddTodo } from './components/molecules/AddTodo/AddTodo';
-import { TodoForm } from './components/molecules/TodoForm/TodoForm';
-import { ModifyTodoForm } from './components/molecules/ModifyTodoForm/ModifyTodoForm';
+import { Todo } from './components/molecules/Todo';
+import { AddTodo } from './components/molecules/AddTodo';
+import { TodoForm } from './components/molecules/TodoForm';
+import { ModifyTodoForm } from './components/molecules/ModifyTodoForm';
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import './App.css';
+import { useTodo } from './hooks/useTodo';
 
 const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 
@@ -13,20 +14,13 @@ function App() {
   const [todos, setTodos] = useState([
     { id: nanoid(), name: 'walk dog', completed: false, beingModified: false, tags: ["Sport", "Habit"], dueDate: "Feb 8, 2022 03: 24: 00" },
     { id: nanoid(), name: 'set up a blog', completed: false, beingModified: false, tags: ["Education"], dueDate: "Feb 2, 2022 03: 24: 00" }]);
+
+  const data = useTodo()
+
   const [addFormValues, setAddFormValues] = useState(initialFormState);
   const [editFormValues, setEditFormValues] = useState(initialFormState);
 
   const [isTodoBeingAdded, setIsTodoBeingAdded] = useState(false);
-  const [dateVisible, setDateVisible] = useState(false);
-  const [tagsVisible, setTagsVisible] = useState(false);
-
-  const toggleDateVisibility = () => {
-    console.log("changed date visiblity")
-    setDateVisible((prevVal) => !prevVal);
-  }
-  const toggleTagsVisibility = () => {
-    setTagsVisible((prevVal) => !prevVal);
-  }
 
   const handleAddTodoInputChange = (e) => {
     setAddFormValues({
@@ -109,7 +103,6 @@ function App() {
       })
     )
   }
-  console.log(todos);
 
 
   const todosList = todos.map(todo =>
@@ -139,12 +132,11 @@ function App() {
             handleInputChange={handleAddTodoInputChange}
             handleSubmit={handleSubmit}
             toggleAddingTodo={toggleAddingTodo}
-            toggleDateVisibility={toggleDateVisibility}
             formValues={addFormValues}
           /> :
           <AddTodo toggleAddingTodo={toggleAddingTodo} />}
       </div>
-    </div>
+    </div >
   );
 }
 

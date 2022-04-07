@@ -7,8 +7,6 @@ import { TagIcon } from "../../atoms/TagIcon"
 import { BsThreeDotsVertical, BsFillTrashFill } from "react-icons/bs"
 import { FiEdit } from "react-icons/fi"
 
-
-
 const Wrapper = styled.li`
     position: relative;
     width: 100%;
@@ -33,7 +31,6 @@ const TodoInfo = styled.div`
     display: flex;
     align-items: center;
 `;
-// const TodoOptions = 
 
 const TodoDate = styled.span`
     display: flex;
@@ -79,7 +76,6 @@ const OptionsWrapper = styled.div`
     width: 10rem;
     height: 4rem;
     cursor: default;
-   
 `;
 const Overlay = styled.div`
     position: fixed;
@@ -137,21 +133,13 @@ const Options = ({ deleteTodo, toggleBeingModified }) => {
 }
 
 
-export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) => {
+const TodoListItem = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) => {
     const [optionsVisible, setOptionsVisible] = useState(false);
-    const [dateVisible, setDateVisible] = useState(false);
-    const [tagsVisible, setTagsVisible] = useState(false);
-
 
     const toggleOptionsVisibility = () => {
         setOptionsVisible((prevVal) => !prevVal);
     }
-    const toggleDateVisibility = () => {
-        setDateVisible((prevVal) => !prevVal);
-    }
-    const toggleTagsVisibility = () => {
-        setTagsVisible((prevVal) => !prevVal);
-    }
+
     return (
         <Wrapper>
             <CheckBoxWrapper>
@@ -162,7 +150,7 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) 
                     <p className={todo.completed ? "todo-name todo-name_completed" : "todo-name"}>{todo.name}</p>
                 </div>
                 <TodoInfo>
-                    <TodoDate onClick={toggleDateVisibility} dueDate={todo.dueDate} >
+                    <TodoDate dueDate={todo.dueDate} >
                         <CalendarIcon /> {GetDayAndMonth(todo.dueDate)}
                     </TodoDate>
                     {todo.tags.map(tag => <TodoTag><TagIcon />{tag}</TodoTag>)}
@@ -175,3 +163,5 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) 
         </Wrapper>
     );
 }
+
+export default TodoListItem;

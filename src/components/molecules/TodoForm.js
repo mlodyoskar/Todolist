@@ -1,10 +1,9 @@
 import react, { useState } from "react";
 import styled from "styled-components";
-import { Button } from "../../atoms/Button/Button"
-import { Input } from "../../atoms/Input/Input"
-import { CalendarIcon } from "../../atoms/CalendarIcon";
-import { TagIcon } from "../../atoms/TagIcon";
-import { Popup } from "../../atoms/Popup/Popup"
+import { Button } from "../atoms/Button"
+import { Input } from "../atoms/Input"
+import { CalendarIcon } from "../atoms/CalendarIcon";
+import { TagIcon } from "../atoms/TagIcon";
 
 
 const Wrapper = styled.form`
@@ -22,22 +21,21 @@ const ButtonsWrapper = styled.div`
 `;
 
 
-export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBeingModified, handleSubmit }) => {
+export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAddingTodo, toggleDateVisibility }) => {
     return (
 
-        <Wrapper onSubmit={(e) => handleSubmit(e, todo.name)} >
+        <Wrapper onSubmit={handleSubmit} >
             <InputWrapper>
                 <Input
                     placeholder="e.g Do the rest of scrimba lessons"
                     autoComplete="off"
                     name="name"
                     type="text"
-                    autoFocus
                     value={formValues.name}
                     onChange={handleInputChange}
                 />
                 <ButtonsWrapper>
-                    <Button type="button" secondary >
+                    <Button onClick={toggleDateVisibility} type="button" secondary >
                         <CalendarIcon /> Today
                     </Button>
 
@@ -48,8 +46,8 @@ export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBein
 
             </InputWrapper>
             <ButtonsWrapper>
-                <Button type="submit" primary onClick={(e) => handleSubmit(e, todo.id, todo.name)} >Edit Todo</Button>
-                <Button type="button" secondary onClick={() => toggleBeingModified(todo.id)} >Cancel</Button>
+                <Button type="submit" primary >Add Task</Button>
+                <Button type="button" secondary onClick={toggleAddingTodo} >Cancel</Button>
             </ButtonsWrapper>
         </Wrapper >
     )
