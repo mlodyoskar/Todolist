@@ -1,11 +1,10 @@
-import react, { useState } from "react";
+import { Icon } from "components/Icon/Icon";
+import React, { useState } from "react";
+import { FiCalendar, FiTag } from "react-icons/fi";
 import styled from "styled-components";
-import { Button } from "../../atoms/Button"
-import { Input } from "../../atoms/Input"
-import { CalendarIcon } from "../../atoms/CalendarIcon";
-import { TagIcon } from "../../atoms/TagIcon";
-import OptionList from "../OptionList";
-
+import { Button } from "../Button/Button"
+import { Input } from "../Input/Input"
+import { Calendar } from "components/Calendar/Calendar";
 
 const Wrapper = styled.form`
     padding: 1em;    
@@ -25,14 +24,12 @@ const ButtonsWrapper = styled.div`
 
 export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAddingTodo }) => {
     const [dateVisibility, setDateVisibility] = useState(false);
-    console.log(dateVisibility)
 
     const toggleDateVisibility = () => {
         setDateVisibility(oldVisibility => !oldVisibility)
     }
 
     return (
-
         <Wrapper onSubmit={handleSubmit} >
             <InputWrapper>
                 <Input
@@ -46,14 +43,17 @@ export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAd
                 />
                 <ButtonsWrapper>
                     <Button onClick={toggleDateVisibility} type="button" secondary >
-                        <CalendarIcon /> Today
+                        <Icon size='s'>
+                            <FiCalendar />
+                        </Icon> Calendar
                     </Button>
-                    {dateVisibility && <OptionList
-                        toggleDateVisibility={toggleDateVisibility}
-                        items={["Today", "Tomorrow", "Saturday"]} />}
+                    {dateVisibility && <Calendar
+                        toggleVisibility={toggleDateVisibility} />}
 
                     <Button type="button" secondary >
-                        <TagIcon /> Tags
+                        <Icon size='s'>
+                            <FiTag />
+                        </Icon> Tags
                     </Button>
                 </ButtonsWrapper>
 

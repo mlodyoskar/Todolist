@@ -1,3 +1,18 @@
-export const todosData = [
-    { id: "ixXoAyKyCFO4", name: 'walk dog', completed: false, beingModified: false, tags: ["Sport", "Habit"], dueDate: "Feb 8, 2022 03: 24: 00" },
-    { id: "Kw6kPVGVi7XV", name: 'set up a blog', completed: false, beingModified: false, tags: ["Education"], dueDate: "Feb 2, 2022 03: 24: 00" }]
+export const todos = [
+    {
+        id: "13fd5b06",
+        name: "Walk dog",
+        completed: false,
+        beingModified: false,
+        tags: ["Sport", "Hobby"],
+        dueDate: "Thu Apr 20 2022"
+    },
+    {
+        id: "19bb85ea",
+        name: "Learn react useContext hook",
+        completed: false,
+        beingModified: false,
+        tags: ["React"],
+        dueDate: "Thu Apr 24 2022"
+    }
+]

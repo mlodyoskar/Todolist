@@ -2,8 +2,6 @@ import { useState } from "react"
 import { Checkbox } from "../../atoms/Checkbox";
 import styled from "styled-components";
 import { CheckIfisDue, GetDayAndMonth } from "../../../helpers/date";
-import { CalendarIcon } from "../../atoms/CalendarIcon"
-import { TagIcon } from "../../atoms/TagIcon"
 import { BsThreeDotsVertical, BsFillTrashFill } from "react-icons/bs"
 import { FiEdit } from "react-icons/fi"
 
@@ -151,7 +149,7 @@ const TodoListItem = ({ todo, toggleComplete, deleteTodo, toggleBeingModified })
                 </div>
                 <TodoInfo>
                     <TodoDate dueDate={todo.dueDate} >
-                        <CalendarIcon /> {GetDayAndMonth(todo.dueDate)}
+                        {/* <162ndarIcon /> {GetDayAndMonth(todo.dueDate)} */}
                     </TodoDate>
                     {todo.tags.map(tag => <TodoTag><TagIcon />{tag}</TodoTag>)}
                 </TodoInfo>

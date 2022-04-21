@@ -1,18 +1,16 @@
 import { useState } from "react"
-import { Checkbox } from "../atoms/Checkbox";
+import { Checkbox } from "../Checkbox/Checkbox";
 import styled from "styled-components";
 import { CheckIfisDue, GetDayAndMonth } from "../../helpers/date";
-import { CalendarIcon } from "../atoms/CalendarIcon"
-import { TagIcon } from "../atoms/TagIcon"
 import { BsThreeDotsVertical, BsFillTrashFill } from "react-icons/bs"
-import { FiEdit } from "react-icons/fi"
-
-
+import { FiEdit, FiCalendar, FiTag } from "react-icons/fi"
+import { Icon } from "components/Icon/Icon";
+import { Tag } from "components/Tag/Tag";
 
 const Wrapper = styled.li`
     position: relative;
     width: 100%;
-    max-height: 4.5em;
+    max-height: 5em;
     display: flex;
     align-content: center;
     padding: 1em;
@@ -21,6 +19,7 @@ const Wrapper = styled.li`
 
 const CheckBoxWrapper = styled.div`
     display: flex;
+    align-items: center;
     height: 100%;
 `;
 const TodoWrapper = styled.div`
@@ -33,7 +32,6 @@ const TodoInfo = styled.div`
     display: flex;
     align-items: center;
 `;
-// const TodoOptions = 
 
 const TodoDate = styled.span`
     display: flex;
@@ -46,17 +44,7 @@ const TodoDate = styled.span`
     color: ${props => CheckIfisDue(props.dueDate) ? "#FF4500" : "black"};
 
 `;
-const TodoTag = styled.span`
-    height: 60%;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    font-size: 0.8rem;
-    padding: 0 0.4rem;
-    background-color: rgba(70,130,180, 0.5);
-    border-radius: 10px;
-    margin: 0 0.2rem;
-`;
+
 const ThreeDotsWrapper = styled.div`
     display: flex;
     height: 100%;
@@ -105,6 +93,8 @@ const OptionsList = styled.ul`
 
 `;
 const OptionsListItem = styled.li`
+    display: flex;
+    align-items: center;
     cursor: pointer;
     width: 100%;
     height: 100%;
@@ -126,10 +116,14 @@ const Options = ({ deleteTodo, toggleBeingModified }) => {
             <Overlay />
             <OptionsList>
                 <OptionsListItem onClick={toggleBeingModified}>
-                    <FiEdit /> Edit
+                    <Icon>
+                        <FiEdit />
+                    </Icon> Edit
                 </OptionsListItem>
                 <OptionsListItem onClick={deleteTodo} delete >
-                    <BsFillTrashFill /> Delete
+                    <Icon>
+                        <BsFillTrashFill />
+                    </Icon> Delete
                 </OptionsListItem>
             </OptionsList>
         </OptionsWrapper>
@@ -163,14 +157,14 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, toggleBeingModified }) 
                 </div>
                 <TodoInfo>
                     <TodoDate onClick={toggleDateVisibility} dueDate={todo.dueDate} >
-                        <CalendarIcon /> {GetDayAndMonth(todo.dueDate)}
+                        <FiCalendar /> {GetDayAndMonth(todo.dueDate)}
                     </TodoDate>
-                    {todo.tags.map(tag => <TodoTag><TagIcon />{tag}</TodoTag>)}
+                    {todo.tags.map(tag => <Tag key={tag} name={tag} />)}
                 </TodoInfo>
             </TodoWrapper>
             <ThreeDotsWrapper onClick={toggleOptionsVisibility}>
                 <ThreeDots />
-                {optionsVisible ? <Options toggleBeingModified={() => toggleBeingModified(todo.id)} deleteTodo={() => deleteTodo(todo.id)} /> : null}
+                {optionsVisible && <Options toggleBeingModified={() => toggleBeingModified(todo.id)} deleteTodo={() => deleteTodo(todo.id)} />}
             </ThreeDotsWrapper>
         </Wrapper>
     );

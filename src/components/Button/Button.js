@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 export const Button = styled.button`
   display: flex;
+  align-items: center;
   cursor: pointer;
   border: ${(props) =>
     props.primary ? "none" : props.secondary ? "1px solid black" : "#123456"};
@@ -16,6 +16,6 @@ export const Button = styled.button`
     props.primary
       ? "rgba(70,130,180, 1)"
       : props.secondary
-      ? "white"
-      : "#123456"};
+        ? "white"
+        : "#123456"};
 `;

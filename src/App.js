@@ -1,21 +1,17 @@
-import { Todo } from './components/molecules/Todo';
-import { AddTodo } from './components/molecules/AddTodo';
-import { TodoForm } from './components/molecules/TodoForm';
-import { ModifyTodoForm } from './components/molecules/ModifyTodoForm';
+import { Todo } from 'components/Todo/Todo';
+import { AddTodo } from 'components/AddTodo/AddTodo';
+import { TodoForm } from 'components/TodoForm/TodoForm';
+import { ModifyTodoForm } from 'components/ModifyTodoForm/ModifyTodoForm';
 import React, { useState } from 'react';
+import { todos as todosData } from 'data/todos';
 import { nanoid } from 'nanoid';
 import './App.css';
-import { useTodo } from './hooks/useTodo';
 
 const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: nanoid(), name: 'walk dog', completed: false, beingModified: false, tags: ["Sport", "Habit"], dueDate: "Feb 8, 2022 03: 24: 00" },
-    { id: nanoid(), name: 'set up a blog', completed: false, beingModified: false, tags: ["Education"], dueDate: "Feb 2, 2022 03: 24: 00" }]);
-
-  const data = useTodo()
+  const [todos, setTodos] = useState(todosData);
 
   const [addFormValues, setAddFormValues] = useState(initialFormState);
   const [editFormValues, setEditFormValues] = useState(initialFormState);

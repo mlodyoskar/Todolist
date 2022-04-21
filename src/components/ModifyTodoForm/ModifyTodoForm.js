@@ -1,9 +1,9 @@
-import react, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Button } from "../atoms/Button"
-import { Input } from "../atoms/Input"
-import { CalendarIcon } from "../atoms/CalendarIcon";
-import { TagIcon } from "../atoms/TagIcon";
+import { Button } from "../Button/Button"
+import { Input } from "../Input/Input"
+import { Icon } from "components/Icon/Icon";
+import { FiCalendar, FiTag } from "react-icons/fi";
 
 
 const Wrapper = styled.form`
@@ -37,11 +37,15 @@ export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBein
                 />
                 <ButtonsWrapper>
                     <Button type="button" secondary >
-                        <CalendarIcon /> Today
+                        <Icon size='s'>
+                            <FiCalendar />
+                        </Icon> Today
                     </Button>
 
                     <Button type="button" secondary >
-                        <TagIcon /> Tags
+                        <Icon>
+                            <FiTag />
+                        </Icon>
                     </Button>
                 </ButtonsWrapper>
 

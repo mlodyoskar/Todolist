@@ -1,4 +1,3 @@
-import react from "react"
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -52,19 +51,13 @@ const ListItem = styled.li`
 `;
 
 
-const OptionList = ({ items, toggleDateVisibility }) => {
+export const OverlayPopup = ({ children, toggleVisibility }) => {
     return (
         <Wrapper>
-            <Overlay onClick={toggleDateVisibility} />
-            <List>
-                {items.map(item => (
-                    <ListItem>
-                        {item}
-                    </ListItem>
-                ))}
-            </List>
+            <Overlay onClick={toggleVisibility} />
+            {children}
         </Wrapper >
     )
 }
 
-export default OptionList;
+export { List, ListItem }
