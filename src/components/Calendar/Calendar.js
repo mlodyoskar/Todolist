@@ -1,10 +1,11 @@
 import { OverlayPopup, List, ListItem } from "components/OverlayPopup/OverlayPopup"
+import { useCalendar } from "hooks/useCalendar"
 
-export const Calendar = ({ toggleVisibility }) => {
+export const Calendar = ({ toggleVisibility, }) => {
     return (
         <OverlayPopup toggleVisibility={toggleVisibility}>
             <List>
-                <ListItem>
+                <ListItem onClick={() => useCalendar()}>
                     Today
                 </ListItem>
                 <ListItem>

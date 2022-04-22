@@ -22,7 +22,7 @@ const ButtonsWrapper = styled.div`
 
 
 
-export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAddingTodo }) => {
+export const TodoForm = ({ formValues, setFormValues, handleInputChange, handleSubmit, toggleAddingTodo }) => {
     const [dateVisibility, setDateVisibility] = useState(false);
 
     const toggleDateVisibility = () => {
@@ -48,6 +48,7 @@ export const TodoForm = ({ formValues, handleInputChange, handleSubmit, toggleAd
                         </Icon> Calendar
                     </Button>
                     {dateVisibility && <Calendar
+
                         toggleVisibility={toggleDateVisibility} />}
 
                     <Button type="button" secondary >

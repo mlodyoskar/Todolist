@@ -1,19 +1,16 @@
 import React, { useState } from "react"
-import { AddTodo } from '../../molecules/AddTodo';
-import { TodoForm } from '../../molecules/TodoForm/TodoForm';
-import { ModifyTodoForm } from '../../molecules/ModifyTodoForm/ModifyTodoForm';
-import { todosData } from "../../../data/todos";
+import { AddTodo } from 'AddTodo';
+import { TodoForm } from '/TodoForm/TodoForm';
+import { ModifyTodoForm } from '/ModifyTodoForm/ModifyTodoForm';
 import { nanoid } from "nanoid";
-import TodoListItem from "../../molecules/TodoListItem";
+import TodoListItem from "/TodoListItem";
 import { toast, ToastContainer } from "react-toastify";
-import { useQuery } from "react-query";
 
 const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 
 
 
 export const TodoList = () => {
-    // const [todos, setTodos] = useState(todosData);
 
     const [isTodoBeingAdded, setIsTodoBeingAdded] = useState(false);
     const [addFormValues, setAddFormValues] = useState(initialFormState);
