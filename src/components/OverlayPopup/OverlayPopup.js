@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const OverlayWrapper = styled.div`
     position: absolute;
     top: 2.5em;
     width: auto;
@@ -51,13 +51,4 @@ const ListItem = styled.li`
 `;
 
 
-export const OverlayPopup = ({ children, toggleVisibility }) => {
-    return (
-        <Wrapper>
-            <Overlay onClick={toggleVisibility} />
-            {children}
-        </Wrapper >
-    )
-}
-
-export { List, ListItem }
+export { List, ListItem, OverlayWrapper, Overlay }

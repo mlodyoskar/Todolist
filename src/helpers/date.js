@@ -1,4 +1,4 @@
-const GetDayAndMonth = (date) => {
+const getDayAndMonth = (date) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May"];
 
     let formatedDate = new Date(date)
@@ -7,10 +7,10 @@ const GetDayAndMonth = (date) => {
     return `${day} ${month}`
 }
 
-const CheckIfisDue = (date) => {
+const checkIfisDue = (date) => {
     let now = Date.now();
     let dueDate = Date.parse(date)
     return now > dueDate;
 }
 
-export { CheckIfisDue, GetDayAndMonth }
+export { checkIfisDue, getDayAndMonth }

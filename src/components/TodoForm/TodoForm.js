@@ -1,10 +1,13 @@
 import { Icon } from "components/Icon/Icon";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { FiCalendar, FiTag } from "react-icons/fi";
 import styled from "styled-components";
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 import { Calendar } from "components/Calendar/Calendar";
+import { useForm } from "hooks/useForm";
+import { nanoid } from "nanoid";
+import { TodosContext } from "providers/TodosProvider";
 
 const Wrapper = styled.form`
     padding: 1em;    
@@ -20,13 +23,28 @@ const ButtonsWrapper = styled.div`
     position: relative;
 `;
 
+const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 
+export const TodoForm = ({ toggleAddingTodo }) => {
+    const { formValues, handleInputChange, handleClearForm } = useForm(initialFormState)
+    const { addTodo } = useContext(TodosContext)
 
-export const TodoForm = ({ formValues, setFormValues, handleInputChange, handleSubmit, toggleAddingTodo }) => {
-    const [dateVisibility, setDateVisibility] = useState(false);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newTodo = {
+            id: nanoid(),
+            name: formValues.name,
+            completed: false,
+            beingModified: false,
+            tags: [],
+            dueDate: "Apr 25"
+        }
+        if (newTodo.name) {
+            addTodo(newTodo)
+            toggleAddingTodo();
+            handleClearForm(initialFormState)
+        }
 
-    const toggleDateVisibility = () => {
-        setDateVisibility(oldVisibility => !oldVisibility)
     }
 
     return (
@@ -42,14 +60,14 @@ export const TodoForm = ({ formValues, setFormValues, handleInputChange, handleS
                     autoFocus
                 />
                 <ButtonsWrapper>
-                    <Button onClick={toggleDateVisibility} type="button" secondary >
+                    <Button type="button" secondary >
                         <Icon size='s'>
                             <FiCalendar />
                         </Icon> Calendar
                     </Button>
-                    {dateVisibility && <Calendar
+                    {/* {dateVisibility && <Calendar
 
-                        toggleVisibility={toggleDateVisibility} />}
+                        toggleVisibility={toggleDateVisibility} />} */}
 
                     <Button type="button" secondary >
                         <Icon size='s'>
@@ -61,7 +79,7 @@ export const TodoForm = ({ formValues, setFormValues, handleInputChange, handleS
             </InputWrapper>
             <ButtonsWrapper>
                 <Button type="submit" primary> Add Task</Button>
-                <Button type="button" secondary onClick={toggleAddingTodo} >Cancel</Button>
+                <Button type="button" secondary onClick={() => toggleAddingTodo(false)} >Cancel</Button>
             </ButtonsWrapper>
         </Wrapper >
     )

@@ -1,30 +1,16 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import { Checkbox } from "components/Checkbox/Checkbox";
-import { Wrapper, LeftColumn, RightColumn, Date, Tag, TodoInfo, Name } from "./TodoListItem.styles"
-import { BsThreeDotsVertical, BsFillTrashFill } from "react-icons/bs"
-import { FiEdit } from "react-icons/fi"
+import { Wrapper, LeftColumn, RightColumn, TodoInfo, Name, ThreeDots, ThreeDotsWrapper } from "./TodoListItem.styles"
+import { Tags } from "components/Tags/Tags";
+import { DueDate } from "components/DueDate/DueDate";
 import { TodosContext } from "providers/TodosProvider";
-
-// const Options = ({ deleteTodo, toggleBeingModified }) => {
-//     return (
-//         <OptionsWrapper>
-//             <Overlay />
-//             <OptionsList>
-//                 <OptionsListItem onClick={toggleBeingModified}>
-//                     <FiEdit /> Edit
-//                 </OptionsListItem>
-//                 <OptionsListItem onClick={deleteTodo} delete >
-//                     <BsFillTrashFill /> Delete
-//                 </OptionsListItem>
-//             </OptionsList>
-//         </OptionsWrapper>
-//     )
-// }
-
+import { useToggle } from "hooks/useToggle"
+import { TodoOptions } from "components/TodoOptions/TodoOptions"
 
 const TodoListItem = ({ todo: { id, name, completed, dueDate, tags } }) => {
-    const { toggleComplete } = useContext(TodosContext)
-    console.log(dueDate)
+    const { toggleComplete, deleteTodo } = useContext(TodosContext)
+    const [areOptionsVisible, setAreOptionsVisible] = useToggle()
+
     return (
         <Wrapper>
             <LeftColumn>
@@ -33,14 +19,15 @@ const TodoListItem = ({ todo: { id, name, completed, dueDate, tags } }) => {
             <RightColumn>
                 <Name>{name}</Name>
                 <TodoInfo>
-                    <Date dueDate={dueDate} />
-                    {/* {todo.tags.map(tag => <TodoTag><TagIcon />{tag}</TodoTag>)} */}
+                    <DueDate dueDate={dueDate} />
+                    <Tags tags={tags} />
                 </TodoInfo>
             </RightColumn>
-            {/* <ThreeDotsWrapper onClick={toggleOptionsVisibility}>
+            <ThreeDotsWrapper onClick={setAreOptionsVisible}>
                 <ThreeDots />
-                {optionsVisible ? <Options toggleBeingModified={() => toggleBeingModified(todo.id)} deleteTodo={() => deleteTodo(todo.id)} /> : null}
-            </ThreeDotsWrapper> */}
+                {areOptionsVisible && <TodoOptions
+                    toggleBeingModified={() => toggleBeingModified(id)} />}
+            </ThreeDotsWrapper>
         </Wrapper>
     );
 }

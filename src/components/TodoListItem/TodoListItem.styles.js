@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CheckIfisDue, GetDayAndMonth } from "helpers/date";
+import { BsThreeDotsVertical } from "react-icons/bs"
 
 const Wrapper = styled.li`
     position: relative;
@@ -7,7 +7,7 @@ const Wrapper = styled.li`
     max-height: 5em;
     max-width: 30rem;
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 10% 80% 10%;
     grid-template-rows: 1fr 1fr;
     align-content: center;
     padding: 1em;
@@ -37,45 +37,25 @@ const TodoInfo = styled.div`
     display: flex;
     align-items: center;
 `;
+const ThreeDotsWrapper = styled.div`
+    display: flex;
+    justify-content: end;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+`;
+const ThreeDots = styled(BsThreeDotsVertical)`
+    display: flex;
+    align-self: center;
+    height: 20px;
+    width: 20px;
+    visibility: hidden;
+    border-radius: 100%;
+    ${Wrapper}:hover & {
+        visibility: visible;
+    }
+`;
 
-const Date = styled.span`
-    display: flex;
-    align-items: center;
-    width: 4rem;
-    justify-content: space-around;
-    font-size: 0.8rem;
-    padding: 0.5rem;
-    padding-left: 0;
-    color: ${props => CheckIfisDue(props.dueDate) ? "#FF4500" : "black"};
-`;
-const Tag = styled.span`
-    height: 60%;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    font-size: 0.8rem;
-    padding: 0 0.4rem;
-    background-color: rgba(70,130,180, 0.5);
-    border-radius: 10px;
-    margin: 0 0.2rem;
-`;
-// const ThreeDotsWrapper = styled.div`
-//     display: flex;
-//     height: 100%;
-//     cursor: pointer;
-//     position: relative;
-// `;
-// const ThreeDots = styled(BsThreeDotsVertical)`
-//     display: flex;
-//     align-self: center;
-//     height: 20px;
-//     width: 20px;
-//     visibility: hidden;
-//     border-radius: 100%;
-//     ${Wrapper}:hover & {
-//         visibility: visible;
-//     }
-// `;
 // const OptionsWrapper = styled.div`
 //     position: absolute;
 //     width: 10rem;
@@ -121,4 +101,4 @@ const Tag = styled.span`
 //     }
 // `;
 
-export { Wrapper, LeftColumn, RightColumn, Date, Tag, TodoInfo, Name }
+export { Wrapper, LeftColumn, RightColumn, TodoInfo, Name, ThreeDotsWrapper, ThreeDots }

@@ -25,10 +25,9 @@ const Add = styled.span`
     font-size: 1.1rem;
 `;
 
-// eslint-disable-next-line react/prop-types
 export const AddTodo = ({ toggleAddingTodo }) => {
     return (
-        <AddTodoWrapper onClick={toggleAddingTodo}>
+        <AddTodoWrapper onClick={() => toggleAddingTodo(true)}>
             <PlusIcon />
             <Add>
                 Add new todo

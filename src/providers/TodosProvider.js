@@ -1,5 +1,35 @@
 import { todos as todosData } from "data/todos"
-import React, { useState } from "react"
+import React, { useReducer } from "react"
+
+const actionTypes = {
+    addTodo: 'ADD TODO',
+    deleteTodo: 'DELETE TODO',
+    toggleCompletedTodo: 'TOGGLE COMPLETED TODO'
+}
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case actionTypes.addTodo:
+            return [...state, action.payload.todo]
+
+        case actionTypes.toggleCompletedTodo:
+            return state.map(todo => {
+                if (todo.id === action.payload.id) {
+                    return {
+                        ...todo,
+                        completed: !todo.completed
+                    }
+                }
+                return todo
+            })
+
+        case actionTypes.deleteTodo:
+            return state.filter(todo => todo.id != action.payload.id)
+
+        default:
+            return state
+    }
+}
 
 export const TodosContext = React.createContext({
     todos: [],
@@ -10,29 +40,41 @@ export const TodosContext = React.createContext({
 )
 
 export const TodosProvider = ({ children }) => {
-    const [todos, setTodos] = useState(todosData)
+    const [todos, dispatch] = useReducer(reducer, todosData)
 
     const deleteTodo = (id) => {
-        let filteredTodos = todos.filter(todo => {
-            return todo.id !== id;
+        dispatch({
+            type: actionTypes.deleteTodo,
+            payload: {
+                id
+            }
         })
-        setTodos(filteredTodos);
+    }
+
+    const addTodo = (todo) => {
+        dispatch({
+            type: actionTypes.addTodo,
+            payload: {
+                todo
+            }
+        })
+
     }
 
     const toggleComplete = (id) => {
-        let filteredTodos = todos.map(todo => {
-            if (todo.id === id) {
-                todo.completed = !todo.completed;
+        dispatch({
+            type: actionTypes.toggleCompletedTodo,
+            payload: {
+                id
             }
-            return todo;
         })
-        setTodos(filteredTodos);
     }
 
     return (
         <TodosContext.Provider
             value={{
                 todos,
+                addTodo,
                 deleteTodo,
                 toggleComplete,
             }}

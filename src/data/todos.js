@@ -5,7 +5,7 @@ export const todos = [
         completed: false,
         beingModified: false,
         tags: ["Sport", "Hobby"],
-        dueDate: "Thu Apr 20 2022"
+        dueDate: "Apr 20"
     },
     {
         id: "19bb85ea",
@@ -13,6 +13,6 @@ export const todos = [
         completed: false,
         beingModified: false,
         tags: ["React"],
-        dueDate: "Thu Apr 24 2022"
+        dueDate: "Apr 24"
     }
 ]
