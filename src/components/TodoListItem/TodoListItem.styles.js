@@ -56,49 +56,4 @@ const ThreeDots = styled(BsThreeDotsVertical)`
     }
 `;
 
-// const OptionsWrapper = styled.div`
-//     position: absolute;
-//     width: 10rem;
-//     height: 4rem;
-//     cursor: default;
-// `;
-// const Overlay = styled.div`
-//     position: fixed;
-//     top: 0;
-//     left:0;
-//     right: 0;
-//     bottom: 0;
-//     z-index: 100;
-// `;
-// const OptionsList = styled.ul`
-//     width: 100%;
-//     /* height: 100%; */
-//     padding: 0;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     position: absolute;
-//     list-style: none;
-//     z-index: 200;
-//     background-color: #FEFEFE;
-//     border-radius:10px;
-//     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
-
-// `;
-// const OptionsListItem = styled.li`
-//     cursor: pointer;
-//     width: 100%;
-//     height: 100%;
-//     text-align: start;
-//     padding: 0.5em 1em;
-//     font-size: 1rem;
-//     padding-bottom: 0.5rem;
-//     border-radius: ${props => props.delete ? "0 0 10px 10px" : "10px 10px 0 0"};
-//     color: ${props => props.delete ? "#FF4500" : ""};
-
-//     &:hover {
-//         background-color: rgb(99 99 99 / 10%);
-//     }
-// `;
-
 export { Wrapper, LeftColumn, RightColumn, TodoInfo, Name, ThreeDotsWrapper, ThreeDots }

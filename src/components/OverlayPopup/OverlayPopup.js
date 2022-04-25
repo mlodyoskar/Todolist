@@ -30,14 +30,17 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-    padding: 1em 0.5em;
+    min-width: 6em;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     width: 100%;
     height: 100%;
     text-align: start;
-    padding: 0.5em 1em;
+    padding: 0.5em ;
     font-size: 1rem;
     padding-bottom: 0.5rem;
+    color: ${props => props.delete ? "red" : ""};
 
     &:hover {
         background-color: rgb(99 99 99 / 10%);

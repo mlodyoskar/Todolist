@@ -7,8 +7,8 @@ import { TodosContext } from "providers/TodosProvider";
 import { useToggle } from "hooks/useToggle"
 import { TodoOptions } from "components/TodoOptions/TodoOptions"
 
-const TodoListItem = ({ todo: { id, name, completed, dueDate, tags } }) => {
-    const { toggleComplete, deleteTodo } = useContext(TodosContext)
+const TodoListItem = ({ todo: { id, name, completed, dueDate, tags, beingModified } }) => {
+    const { toggleComplete } = useContext(TodosContext)
     const [areOptionsVisible, setAreOptionsVisible] = useToggle()
 
     return (
@@ -25,8 +25,7 @@ const TodoListItem = ({ todo: { id, name, completed, dueDate, tags } }) => {
             </RightColumn>
             <ThreeDotsWrapper onClick={setAreOptionsVisible}>
                 <ThreeDots />
-                {areOptionsVisible && <TodoOptions
-                    toggleBeingModified={() => toggleBeingModified(id)} />}
+                {areOptionsVisible && <TodoOptions id={id} />}
             </ThreeDotsWrapper>
         </Wrapper>
     );

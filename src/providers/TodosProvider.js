@@ -4,7 +4,8 @@ import React, { useReducer } from "react"
 const actionTypes = {
     addTodo: 'ADD TODO',
     deleteTodo: 'DELETE TODO',
-    toggleCompletedTodo: 'TOGGLE COMPLETED TODO'
+    toggleCompletedTodo: 'TOGGLE COMPLETED TODO',
+    toggleModifiedTodo: 'TOGGLE MODIFIED TODO'
 }
 
 const reducer = (state, action) => {
@@ -23,6 +24,17 @@ const reducer = (state, action) => {
                 return todo
             })
 
+        case actionTypes.toggleModifiedTodo:
+            return state.map(todo => {
+                if (todo.id === action.payload.id) {
+                    return {
+                        ...todo,
+                        beingModified: !todo.beingModified
+                    }
+                }
+                return todo
+            })
+
         case actionTypes.deleteTodo:
             return state.filter(todo => todo.id != action.payload.id)
 
@@ -36,6 +48,7 @@ export const TodosContext = React.createContext({
     addTodo: () => { },
     deleteTodo: () => { },
     toggleComplete: () => { },
+    toggleBeingModified: () => { },
 }
 )
 
@@ -60,6 +73,15 @@ export const TodosProvider = ({ children }) => {
         })
 
     }
+    const toggleBeingModified = (id) => {
+        dispatch({
+            type: actionTypes.toggleModifiedTodo,
+            payload: {
+                id
+            }
+        })
+
+    }
 
     const toggleComplete = (id) => {
         dispatch({
@@ -77,6 +99,7 @@ export const TodosProvider = ({ children }) => {
                 addTodo,
                 deleteTodo,
                 toggleComplete,
+                toggleBeingModified
             }}
         >
             {children}

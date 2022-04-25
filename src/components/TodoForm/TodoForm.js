@@ -44,7 +44,6 @@ export const TodoForm = ({ toggleAddingTodo }) => {
             toggleAddingTodo();
             handleClearForm(initialFormState)
         }
-
     }
 
     return (

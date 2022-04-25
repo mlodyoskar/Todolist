@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 import { Icon } from "components/Icon/Icon";
 import { FiCalendar, FiTag } from "react-icons/fi";
+import { TodosContext } from "providers/TodosProvider";
+import { useForm } from "hooks/useForm"
+import { nanoid } from "nanoid";
 
 
 const Wrapper = styled.form`
@@ -21,13 +24,33 @@ const ButtonsWrapper = styled.div`
 `;
 
 
-export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBeingModified, handleSubmit }) => {
+export const ModifyTodoForm = ({ todo: { id, name, completed, beingModified, tags, dueDate } }) => {
+    const { formValues, handleInputChange } = useForm({
+        id, name, completed, beingModified, tags, dueDate
+    });
+    const { toggleBeingModified, addTodo, deleteTodo } = useContext(TodosContext)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newTodo = {
+            id: nanoid(),
+            name: formValues.name,
+            completed: formValues.completed,
+            beingModified: false,
+            tags: formValues.tags,
+            dueDate: formValues.dueDate
+        }
+        if (newTodo.name) {
+            deleteTodo(id)
+            addTodo(newTodo)
+        }
+    }
+
     return (
 
-        <Wrapper onSubmit={(e) => handleSubmit(e, todo.name)} >
+        <Wrapper onSubmit={(e) => handleSubmit(e, name)} >
             <InputWrapper>
                 <Input
-                    placeholder="e.g Do the rest of scrimba lessons"
                     autoComplete="off"
                     name="name"
                     type="text"
@@ -51,8 +74,8 @@ export const ModifyTodoForm = ({ todo, formValues, handleInputChange, toggleBein
 
             </InputWrapper>
             <ButtonsWrapper>
-                <Button type="submit" primary onClick={(e) => handleSubmit(e, todo.id, todo.name)} >Edit Todo</Button>
-                <Button type="button" secondary onClick={() => toggleBeingModified(todo.id)} >Cancel</Button>
+                <Button type="submit" primary onClick={(e) => handleSubmit(e, id, name)} >Edit Todo</Button>
+                <Button type="button" secondary onClick={() => toggleBeingModified(id)} >Cancel</Button>
             </ButtonsWrapper>
         </Wrapper >
     )

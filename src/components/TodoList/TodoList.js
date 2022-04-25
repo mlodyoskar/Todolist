@@ -5,12 +5,15 @@ import { ModifyTodoForm } from '/ModifyTodoForm/ModifyTodoForm';
 import { nanoid } from "nanoid";
 import TodoListItem from "/TodoListItem";
 import { toast, ToastContainer } from "react-toastify";
+import { TodosContext } from "providers/TodosProvider"
 
 const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 
 
 
 export const TodoList = () => {
+
+    const { todos } = useContext(TodosContext)
 
     const [isTodoBeingAdded, setIsTodoBeingAdded] = useState(false);
     const [addFormValues, setAddFormValues] = useState(initialFormState);
@@ -61,15 +64,6 @@ export const TodoList = () => {
         setTodos(modifiedTodos);
     }
 
-    const toggleAddingTodo = () => {
-        setIsTodoBeingAdded((prevIsTodoBeingAdded) => {
-            return !prevIsTodoBeingAdded;
-        })
-        setAddFormValues(initialFormState)
-    }
-    const notify = () => {
-        toast.error("Success Notification !");
-    }
 
 
     const handleSubmit = (e) => {
@@ -112,10 +106,7 @@ export const TodoList = () => {
                     return (
                         todo.beingModified ?
                             <ModifyTodoForm
-                                handleInputChange={handleEditTodoInputChange}
-                                toggleBeingModified={toggleBeingModified}
                                 handleSubmit={handleModifySubmit}
-                                formValues={editFormValues}
                                 todo={todo}
                             /> :
                             <TodoListItem
