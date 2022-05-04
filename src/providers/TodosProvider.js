@@ -6,7 +6,6 @@ const actionTypes = {
     deleteTodo: 'DELETE TODO',
     toggleCompletedTodo: 'TOGGLE COMPLETED TODO',
     toggleModifiedTodo: 'TOGGLE MODIFIED TODO',
-    // changeDueDate: 'CHANGE DUE DATE'
 }
 
 const reducer = (state, action) => {
@@ -35,16 +34,6 @@ const reducer = (state, action) => {
                 }
                 return todo
             })
-        // case actionTypes.changeDueDate:
-        //     return state.map(todo => {
-        //         if (todo.id === action.payload.id) {
-        //             return {
-        //                 ...todo,
-        //                 dueDate: todo.dueDate
-        //             }
-        //         }
-        //         return todo
-        //     })
 
         case actionTypes.deleteTodo:
             return state.filter(todo => todo.id != action.payload.id)
