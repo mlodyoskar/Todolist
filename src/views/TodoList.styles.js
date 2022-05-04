@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     border-radius: 0.5em;
     flex-direction: column;
     border: 1px solid grey;
-    overflow-y: scroll;
+    overflow-y: auto;
 `;
 
 export { Wrapper }
