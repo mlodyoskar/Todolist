@@ -9,10 +9,10 @@ export const Checkbox = styled.button`
     justify-self: flex-end;
     cursor: pointer;
     border: ${props => props.done ? "none" : "1px solid black"};
-    background-color: ${props => props.done ? "rgba(0, 171, 102, 1)" : "white"};
+    background-color: ${props => props.done ? "rgba(70,130,180,0.8)" : "white"};
 
     &:hover{
-       background-color : ${props => props.done ? "rgba(0, 171, 102, 1)" : "rgba(0, 171, 102, 0.5)"};
+       background-color : ${props => props.done ? "rgba(70,130,180,0.8)" : "rgba(70,130,180,0.5)"};
     }
 
 `;

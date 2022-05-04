@@ -5,9 +5,8 @@ const Wrapper = styled.li`
     position: relative;
     width: 100%;
     max-height: 5em;
-    max-width: 30rem;
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 5% 90% 5%;
     grid-template-rows: 1fr 1fr;
     align-content: center;
     padding: 1em;
@@ -31,6 +30,7 @@ const RightColumn = styled.div`
 const Name = styled.p`
     font-size: 16px;
     text-align: start;
+    text-decoration: ${props => props.done && "line-through"}
 `;
 
 const TodoInfo = styled.div`

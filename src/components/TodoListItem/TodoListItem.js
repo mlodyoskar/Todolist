@@ -17,7 +17,7 @@ const TodoListItem = ({ todo: { id, name, completed, dueDate, tags, beingModifie
                 <Checkbox done={completed} onClick={() => { toggleComplete(id) }}></Checkbox>
             </LeftColumn>
             <RightColumn>
-                <Name>{name}</Name>
+                <Name done={completed} >{name}</Name>
                 <TodoInfo>
                     <DueDate dueDate={dueDate} />
                     <Tags tags={tags} />
