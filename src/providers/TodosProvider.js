@@ -5,7 +5,8 @@ const actionTypes = {
     addTodo: 'ADD TODO',
     deleteTodo: 'DELETE TODO',
     toggleCompletedTodo: 'TOGGLE COMPLETED TODO',
-    toggleModifiedTodo: 'TOGGLE MODIFIED TODO'
+    toggleModifiedTodo: 'TOGGLE MODIFIED TODO',
+    // changeDueDate: 'CHANGE DUE DATE'
 }
 
 const reducer = (state, action) => {
@@ -34,6 +35,16 @@ const reducer = (state, action) => {
                 }
                 return todo
             })
+        // case actionTypes.changeDueDate:
+        //     return state.map(todo => {
+        //         if (todo.id === action.payload.id) {
+        //             return {
+        //                 ...todo,
+        //                 dueDate: todo.dueDate
+        //             }
+        //         }
+        //         return todo
+        //     })
 
         case actionTypes.deleteTodo:
             return state.filter(todo => todo.id != action.payload.id)
@@ -49,6 +60,7 @@ export const TodosContext = React.createContext({
     deleteTodo: () => { },
     toggleComplete: () => { },
     toggleBeingModified: () => { },
+    changeDueDate: () => { },
 }
 )
 
@@ -71,7 +83,6 @@ export const TodosProvider = ({ children }) => {
                 todo
             }
         })
-
     }
     const toggleBeingModified = (id) => {
         dispatch({
@@ -92,6 +103,7 @@ export const TodosProvider = ({ children }) => {
         })
     }
 
+
     return (
         <TodosContext.Provider
             value={{
@@ -99,7 +111,8 @@ export const TodosProvider = ({ children }) => {
                 addTodo,
                 deleteTodo,
                 toggleComplete,
-                toggleBeingModified
+                toggleBeingModified,
+
             }}
         >
             {children}

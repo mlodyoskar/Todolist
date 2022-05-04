@@ -1,5 +1,5 @@
 import { Icon } from "components/Icon/Icon";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { FiCalendar, FiTag } from "react-icons/fi";
 import styled from "styled-components";
 import { Button } from "../Button/Button"
@@ -8,6 +8,7 @@ import { Calendar } from "components/Calendar/Calendar";
 import { useForm } from "hooks/useForm";
 import { nanoid } from "nanoid";
 import { TodosContext } from "providers/TodosProvider";
+import { TagsSelect } from "components/TagsSelect/TagsSelect";
 
 const Wrapper = styled.form`
     padding: 1em;    
@@ -28,7 +29,10 @@ const initialFormState = { name: '', completed: false, tags: [], dueDate: "" };
 export const TodoForm = ({ toggleAddingTodo }) => {
     const { formValues, handleInputChange, handleClearForm } = useForm(initialFormState)
     const { addTodo } = useContext(TodosContext)
+    const [dateVisibility, setDateVisibility] = useState(false)
+    const [tagsVisibility, setTagsVisibility] = useState(false)
 
+    console.log(tagsVisibility)
     const handleSubmit = (e) => {
         e.preventDefault();
         const newTodo = {
@@ -36,7 +40,7 @@ export const TodoForm = ({ toggleAddingTodo }) => {
             name: formValues.name,
             completed: false,
             beingModified: false,
-            tags: [],
+            tags: formValues.tags, //change when user is able to set them
             dueDate: "Apr 25"
         }
         if (newTodo.name) {
@@ -64,15 +68,20 @@ export const TodoForm = ({ toggleAddingTodo }) => {
                             <FiCalendar />
                         </Icon> Calendar
                     </Button>
-                    {/* {dateVisibility && <Calendar
+                    {dateVisibility && <Calendar
 
-                        toggleVisibility={toggleDateVisibility} />} */}
-
-                    <Button type="button" secondary >
+                        toggleVisibility={toggleDateVisibility} />}
+                    <TagsSelect items={[
+                        'Sport',
+                        'Haibt',
+                        'React',
+                    ]} />
+                    {/* <Button onClick={() => setTagsVisibility(true)} type="button" secondary >
                         <Icon size='s'>
                             <FiTag />
                         </Icon> Tags
                     </Button>
+                    {tagsVisibility && <TagsSelect />} */}
                 </ButtonsWrapper>
 
             </InputWrapper>
