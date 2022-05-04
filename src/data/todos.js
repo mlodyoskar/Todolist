@@ -20,7 +20,7 @@ export const todos = [
         name: "Land first job as a junior frontend developer",
         completed: false,
         beingModified: false,
-        tags: ["React, Job"],
+        tags: ["React", "Job"],
         dueDate: "Sep 1"
     }
 ]
